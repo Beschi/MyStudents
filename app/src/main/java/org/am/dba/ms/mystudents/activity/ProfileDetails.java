@@ -1,7 +1,7 @@
 package org.am.dba.ms.mystudents.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import org.am.dba.ms.mystudents.R;
 

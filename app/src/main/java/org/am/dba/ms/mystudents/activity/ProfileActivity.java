@@ -1,8 +1,11 @@
 package org.am.dba.ms.mystudents.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,11 +14,10 @@ import android.widget.Toast;
 
 import org.am.dba.ms.mystudents.R;
 import org.am.dba.ms.mystudents.adapter.ProfileArrayAdapter;
-import org.am.dba.ms.mystudents.service.StudentAPI;
 import org.am.dba.ms.mystudents.model.Student;
+import org.am.dba.ms.mystudents.service.StudentAPI;
 import org.am.dba.ms.mystudents.util.ServiceBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         final ListView profiles = (ListView)findViewById(R.id.MyStudents_list);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         StudentAPI sApi = ServiceBuilder.createService(StudentAPI.class);
         Call<List<Student>> client = sApi.getStudents();
         final List<Student> lstStudents = new ArrayList<>();
@@ -61,5 +65,23 @@ public class ProfileActivity extends AppCompatActivity {
     public void onBackPressed() {
         // Disable going back to the MainActivity
         moveTaskToBack(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                Toast.makeText(ProfileActivity.this,"Settings clicked",Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
